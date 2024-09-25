@@ -77,11 +77,11 @@ if (isset($_GET['id'])) {
                                     <!-- name  -->
                                     <div class="mb-5.5">
                                         <label class="mb-3 block text-sm font-medium text-black dark:text-white" for="Username">Product Name</label>
-                                        <input class="w-full rounded border border-stroke bg-gray px-4.5 py-3 font-medium text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary" type="text" name="name" id="name" placeholder="Product Name" <?php echo ($data->id) ? ("value='$data->name'") : "" ?> />
+                                        <input class="w-full rounded border border-stroke bg-gray px-4.5 py-3 font-medium text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary" type="text" name="name" id="name" placeholder="Product Name" <?php echo ($data->id) ? ("value='$data->name'") : "" ?> required />
                                     </div>
 
                                     <div class="mb-5.5">
-                                        <label class="mb-3 block text-sm font-medium text-black dark:text-white" for="Username">Product Image</label>
+                                        <label class="mb-3 block text-sm font-medium text-black dark:text-white" for="Username">Product Image preview</label>
                                         <img src="./<?php echo $data->image; ?>" class="rounded-lg" alt="" id="file-preview">
 
                                     </div>
@@ -127,7 +127,7 @@ if (isset($_GET['id'])) {
                                                     </g>
                                                 </svg>
                                             </span>
-                                            <select class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-12 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input" :class="isOptionSelected && 'text-black dark:text-white'" @change="isOptionSelected = true" name="category">
+                                            <select class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-12 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input" :class="isOptionSelected && 'text-black dark:text-white'" @change="isOptionSelected = true" name="category" required>
                                                 <option value="1" class="text-body" <?php echo ($data->category == 1) ? ("selected") : "" ?>>Beauty</option>
                                                 <option value="2" class="text-body" <?php echo ($data->category == 2) ? ("selected") : "" ?>>Hamper</option>
                                             </select>

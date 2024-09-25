@@ -31,7 +31,7 @@ $currentUrl = $protocol . $host . $requestUri;
 
     <!-- <link rel="icon" type="image/svg+xml" href="./assets/IMG-20230309-WA0008-removebg-preview.jpg" /> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Glowing Valley | <?php echo $data->name;?></title>
+    <title>Glowing Valley | <?php echo $data->name; ?></title>
 
     <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
@@ -45,7 +45,7 @@ $currentUrl = $protocol . $host . $requestUri;
 
     <meta property="og:title" content="<?php echo $data->name; ?>" />
     <meta property="og:description" content="<?php echo $data->uses; ?>" />
-    <meta property="og:image" content="<?php echo './admin/'.$data->image; ?>" />
+    <meta property="og:image" content="<?php echo './admin/' . $data->image; ?>" />
     <meta property="og:url" content="<?php echo $currentUrl; ?>" />
     <meta property="og:type" content="<?php echo ($data->category == 1) ? "Beauty Product" : "Hamper Product"; ?>" />
 </head>
@@ -61,9 +61,9 @@ $currentUrl = $protocol . $host . $requestUri;
 
     <section class="overflow-hidden">
         <div class="mx-auto px-5 py-24">
-        <?php echo './admin/' . $data->image; ?>
+            <!-- <?php echo './admin/' . $data->image; ?> -->
             <div class="mx-auto flex flex-wrap items-center lg:w-4/5">
-                <img class="h-72 w-full rounded object-cover lg:h-96 lg:w-1/2" src="<?php echo './admin/' . $data->image; ?>" />
+                <img class="h-72 w-full rounded-lg object-cover lg:h-96 lg:w-1/2" src="<?php echo './admin/' . $data->image; ?>" />
                 <div class="mt-6 w-full lg:mt-0 lg:w-1/2 lg:pl-10">
                     <!-- <h2 class="text-sm font-semibold tracking-widest text-gray-500">
                         <?php echo ($data->category == 1) ? "Beauty Product" : "Hamper Product"  ?>
@@ -110,33 +110,52 @@ $currentUrl = $protocol . $host . $requestUri;
                     </p>
 
                     <div class="my-4 border-b border-gray-300 pb-2">
-                        <h3 class="text-heading mb-2.5 text-base font-semibold capitalize md:text-lg">
-                            Weight
-                        </h3>
+                        <?php
+                        $weights = explode(',', $data->weight);
+                        if ($weights[0] != null) : ?>
+                            <h3 class="text-heading mb-2.5 text-base font-semibold capitalize md:text-lg">
+                                Weight
+                            </h3>
+                        <?php endif; ?>
                         <ul class="colors -mr-3 flex flex-wrap">
 
                             <?php
 
-                            $weights = explode(',', $data->weight);
+
                             $prices = explode(',', $data->prices);
 
-                            for ($i = 0; $i < sizeof($weights); $i++) :
+                            for ($i = 0; $i < sizeof($weights); $i++):
+
+                                if ($weights[$i] != ""):
                             ?>
-                                <a href="overview.php?w=<?php echo $weights[$i]; ?>&p=<?php echo $prices[$i]; ?>">
-                                    <li class="text-heading mb-2 mr-2 flex h-9 px-4 cursor-pointer items-center justify-center rounded border border-gray-300 p-1 text-xs font-semibold uppercase transition duration-200 ease-in-out hover:border-black md:mb-3 md:mr-3 md:h-11  md:text-sm">
-                                        <?php echo $weights[$i] ?>
-                                    </li>
-                                </a>
-                            <?php endfor;
+                                    <a href="overview.php?w=<?php echo $weights[$i]; ?>&p=<?php echo $prices[$i]; ?>">
+                                        <li class="text-heading mb-2 mr-2 flex h-9 px-4 cursor-pointer items-center justify-center rounded border border-gray-300 p-1 text-xs font-semibold uppercase transition duration-200 ease-in-out hover:border-black md:mb-3 md:mr-3 md:h-11  md:text-sm">
+                                            <?php echo $weights[$i] ?>
+                                        </li>
+                                    </a>
+                            <?php endif;
+                            endfor;
                             ?>
 
                         </ul>
                     </div>
 
                     <div class="flex items-center justify-between py-2">
-                        <span class="title-font text-2xl font-bold text-gray-900">
-                            ₹<?php echo (isset($_GET['p'])) ?  " " . $_GET['p'] : " " . $prices[0]; ?>
-                        </span>
+                        <?php
+                        if ($prices[0] != null): ?>
+
+                            <span class="title-font text-2xl font-bold text-gray-900">
+                                <?php echo (isset($_GET['p'])) ?  "₹ " . $_GET['p'] : "₹ " . $prices[0]; ?>
+                            </span>
+                        <?php endif;
+                        ?>
+
+                        <?php
+                        $productName = $data->name;
+                        $whatsappMessage = "I'm interested in this product: $productName , $currentUrl";
+                        // echo urlencode($whatsappMessage);
+                        $whatsappUrl = "whatsapp://send?phone=+91%20$9422706998&text=" . urlencode($whatsappMessage); ?>
+
                         <form action="cart.php" method="POST">
                             <input class="hidden" type="text" name="id" value="<?php echo $data->id; ?>">
 
@@ -145,14 +164,18 @@ $currentUrl = $protocol . $host . $requestUri;
                             <button type="submit" name="cart" class="rounded-md bg-[#041e42] px-3 py-2 text-lg font-semibold text-white shadow-sm hover:bg-[#041e42]/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black">
                                 <i class="ri-shopping-cart-line"></i> Add to Cart
                             </button>
+                            <a href="<?php echo $whatsappUrl ?>">
+
+                                <button type="button" name="buy" class="rounded-md bg-green-500 px-3 py-2 text-lg font-semibold text-white shadow-sm hover:bg-green-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
+                                    <i class="ri-whatsapp-line font-thin"></i> Buy Now
+                                </button>
+                            </a>
+
                         </form>
-                        
-                        <?php 
-                        $productName = $data->name;
-                        $whatsappMessage = "I'm interested in this product: $productName , $currentUrl";
-                        // echo urlencode($whatsappMessage);
-                        $whatsappUrl = "whatsapp://send?phone=+91%20$9422706998&text=" . urlencode($whatsappMessage);?>
-                        <a href="<?php echo $whatsappUrl?>">link</a>
+
+
+
+
                     </div>
                 </div>
             </div>

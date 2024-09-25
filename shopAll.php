@@ -72,7 +72,7 @@ error_reporting(0);
 
             foreach ($data as $row) :
             ?>
-                <div class="rounded-md border">
+                <div class="rounded-md shadow-xl">
                     <a href="./overview.php?id=<?php echo $row->id; ?>"><img src="./admin/<?php echo $row->image; ?>" alt="Laptop" class="aspect-[16/9] w-full rounded-md object-cover md:aspect-auto md:h-[200px] lg:h-[200px]" /></a>
                     <div class="p-4">
                         <h1 class="inline-flex items-center text-lg font-semibold">
@@ -83,24 +83,30 @@ error_reporting(0);
                         </p>
 
                         <div class="mt-5 flex items-center space-x-2">
-                            <span class="block text-md font-semibold">Size : </span>
                             <?php $weight = explode(",", $row->weight);
 
 
 
-                            foreach ($weight as $w) : ?>
+                            foreach ($weight as $w) :
 
 
-                                <span class="block cursor-pointer rounded-md border border-gray-300 p-1 px-2 text-sm font-medium">
-                                    <?php echo $w; ?>
-                                </span>
+                                if ($w != "") :
+                            ?>
 
-                            <?php endforeach; ?>
-                        
+
+
+                                    <span class="block cursor-pointer rounded-md border border-gray-300 p-1 px-2 text-sm font-medium">
+                                        <?php echo $w; ?>
+                                    </span>
+
+                            <?php
+                                endif;
+                            endforeach; ?>
+
                         </div>
                         <div class="mt-5 flex items-center space-x-2">
-                            <span class="block text-lg font-semibold">₹ <?php $price = explode(",", $row->prices);
-                                                                        echo $price[0]; ?></span>
+                            <span class="block text-xl font-semibold font-sans"><?php $price = explode(",", $row->prices);
+                                                                        echo ($price[0] != "") ? "₹ " . $price[0] : "" ?></span>
                             </span>
                         </div>
                         <a href="./overview.php?id=<?php echo $row->id; ?>">

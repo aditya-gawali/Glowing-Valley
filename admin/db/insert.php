@@ -9,8 +9,8 @@ if (isset($_POST['addProduct'])) {
     $uses = $_POST['uses'];
     $ingre = $_POST['ingre'];
 
-    $weight = $_POST['w1'];
-    $prices = $_POST['p1'];
+    $weight = $_POST['w1'] || null;
+    $prices = $_POST['p1'] || null;
 
     for ($i = 2; $i < 3; $i++) {
         if (isset($_POST['w' . $i . ''])) {
@@ -56,7 +56,7 @@ if (isset($_POST['addProduct'])) {
         if ($nofile == false) {
 
             $update = $conn->prepare("update products SET category = :cate, name = :name, uses = :uses, ingre = :ingre, weight = :weight, prices = :prices, image = :image WHERE id = $id");
-            $file = './db/' . $target_file;
+            $file = 'db/' . $target_file;
             $update->execute(array(
                 ':cate' => $category,
                 ':name' => $name,
@@ -85,7 +85,7 @@ if (isset($_POST['addProduct'])) {
     } else {
         $insert = $conn->prepare("insert into products(category,name,uses,ingre,weight,prices,image) values (:cate,:name,:uses,:ingre,:weight,:prices,:image)");
 
-        $file = './db/' . $target_file;
+        $file = 'db/' . $target_file;
         $insert->execute(array(
             ':cate' => $category,
             ':name' => $name,

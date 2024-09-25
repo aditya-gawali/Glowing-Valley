@@ -22,7 +22,7 @@
 <body class="relative">
 
     <?php
-    include './components/navbar.html';
+    include './components/navbar.html'; 
     ?>
 
 
@@ -49,7 +49,7 @@
             </div>
         </div>
 
-        <div class="my-4">
+        <!-- <div class="my-4">
             <h1 class="text-3xl font-bold">Our Team</h1>
             <p class="mt-2 text-gray-500">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
@@ -84,7 +84,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
 
 

@@ -36,13 +36,14 @@ error_reporting(0);
             <div class="swiper w-full h-full">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
-                        <img src="./assets/images/hero.jpg" alt="" class="w-full object-cover h-full">
+                        <img src="./assets/images/hero-2.png" alt="" class="w-full object-cover h-full">
                     </div>
                     <div class="swiper-slide">
-                        <img src="./assets/images/hero2.jpeg" alt="" class="w-full object-cover h-full">
+                        <img src="./assets/images/hero-2.1.png" alt="" class="w-full object-cover h-full">
                     </div>
                     <div class="swiper-slide">
-                        <img src="./assets/images/hero3.jpeg" alt="" class="w-full object-cover h-full">
+                        <!-- <img src="./assets/images/hero3.jpeg" alt="" class="w-full object-cover h-full"> -->
+                        <video src="./assets/images/hamer video.mp4" autoplay loop muted class="w-full object-cover h-full"></video>
                     </div>
 
                 </div>
@@ -53,7 +54,7 @@ error_reporting(0);
         </div>
     </div>
 
-    <div class="px-5 md:px-20 flex flex-col gap-4 bg-gray-50">
+    <div class="px-5 md:px-20 flex flex-col gap-4 ">
         <h1 class="text-center text-2xl md:text-3xl font-bold py-4">Popular Now</h1>
 
         <div class="mx-auto grid w-full max-w-7xl items-center space-y-4 px-2 py-10 md:grid-cols-2 md:gap-4 md:space-y-0 lg:grid-cols-4">
@@ -66,9 +67,9 @@ error_reporting(0);
 
             foreach ($data as $row) :
             ?>
-                <div class="rounded-md border">
-                    <a href="./overview.php?id=<?php echo $row->id; ?>"><img src="./admin/<?php echo $row->image; ?>" alt="Laptop" class="aspect-[16/9] w-full rounded-md md:aspect-auto object-cover md:h-[200px] lg:h-[200px] " /></a>
-                    <div class="p-4">
+                <div class="rounded-md shadow-lg ">
+                    <a href="./overview.php?id=<?php echo $row->id; ?>"><img src="./admin/<?php echo $row->image; ?>" alt="Laptop" class="aspect-[16/9] w-full rounded-md object-cover md:aspect-auto md:h-[200px] lg:h-[200px]" /></a>
+                    <div class="p-4 ">
                         <h1 class="inline-flex items-center text-lg font-semibold">
                             <?php echo $row->name; ?>
                         </h1>
@@ -77,24 +78,30 @@ error_reporting(0);
                         </p>
 
                         <div class="mt-5 flex items-center space-x-2">
-                            <span class="block text-md font-semibold">Size : </span>
                             <?php $weight = explode(",", $row->weight);
 
 
 
-                            foreach ($weight as $w) : ?>
+                            foreach ($weight as $w) :
 
 
-                                <span class="block cursor-pointer rounded-md border border-gray-300 p-1 px-2 text-sm font-medium">
-                                    <?php echo $w; ?>
-                                </span>
+                                if ($w != "") :
+                            ?>
 
-                            <?php endforeach; ?>
+
+
+                                    <span class="block cursor-pointer rounded-md border border-gray-300 p-1 px-2 text-sm font-medium">
+                                        <?php echo $w; ?>
+                                    </span>
+
+                            <?php
+                                endif;
+                            endforeach; ?>
 
                         </div>
                         <div class="mt-5 flex items-center space-x-2">
-                            <span class="block text-lg font-semibold">₹ <?php $price = explode(",", $row->prices);
-                                                                        echo $price[0]; ?></span>
+                            <span class="block text-xl font-semibold font-sans"><?php $price = explode(",", $row->prices);
+                                                                                echo ($price[0] != "") ? "₹ " . $price[0] : "" ?></span>
                             </span>
                         </div>
                         <a href="./overview.php?id=<?php echo $row->id; ?>">
@@ -143,7 +150,7 @@ error_reporting(0);
         </div>
     </div>
 
-    <div class="py-5 px-5 md:px-20 flex flex-col gap-4 bg-gray-50 overflow-hidden">
+    <div class="py-5 px-5 md:px-20 flex flex-col gap-4  overflow-hidden">
         <div class="flex items-center justify-center py-4 hover:cursor-pointer">
             <h1 class="text-center text-xl md:text-2xl font-bold p-2 rounded-l-xl bg-[#041e42] text-white" id="btab">
                 Beauty</h1>
@@ -165,8 +172,8 @@ error_reporting(0);
 
                         foreach ($data as $row) :
                         ?>
-                            <div class="rounded-md border">
-                                <a href="./overview.php?id=<?php echo $row->id; ?>"><img src="./admin/<?php echo $row->image; ?>" alt="Laptop" class="aspect-[16/9] w-full object-cover rounded-md md:aspect-auto md:h-[200px] lg:h-[200px]" /></a>
+                            <div class="rounded-md shadow-xl">
+                                <a href="./overview.php?id=<?php echo $row->id; ?>"><img src="./admin/<?php echo $row->image; ?>" alt="Laptop" class="aspect-[16/9] w-full rounded-md object-cover md:aspect-auto md:h-[200px] lg:h-[200px]" /></a>
                                 <div class="p-4">
                                     <h1 class="inline-flex items-center text-lg font-semibold">
                                         <?php echo $row->name; ?>
@@ -176,24 +183,30 @@ error_reporting(0);
                                     </p>
 
                                     <div class="mt-5 flex items-center space-x-2">
-                                        <span class="block text-md font-semibold">Size : </span>
                                         <?php $weight = explode(",", $row->weight);
 
 
 
-                                        foreach ($weight as $w) : ?>
+                                        foreach ($weight as $w) :
 
 
-                                            <span class="block cursor-pointer rounded-md border border-gray-300 p-1 px-2 text-sm font-medium">
-                                                <?php echo $w; ?>
-                                            </span>
+                                            if ($w != "") :
+                                        ?>
 
-                                        <?php endforeach; ?>
+
+
+                                                <span class="block cursor-pointer rounded-md border border-gray-300 p-1 px-2 text-sm font-medium">
+                                                    <?php echo $w; ?>
+                                                </span>
+
+                                        <?php
+                                            endif;
+                                        endforeach; ?>
 
                                     </div>
                                     <div class="mt-5 flex items-center space-x-2">
-                                        <span class="block text-lg font-semibold">₹ <?php $price = explode(",", $row->prices);
-                                                                                    echo $price[0]; ?></span>
+                                        <span class="block text-xl font-semibold font-sans"><?php $price = explode(",", $row->prices);
+                                                                                            echo ($price[0] != "") ? "₹ " . $price[0] : "" ?></span>
                                         </span>
                                     </div>
                                     <a href="./overview.php?id=<?php echo $row->id; ?>">
@@ -224,8 +237,8 @@ error_reporting(0);
 
                         foreach ($data as $row) :
                         ?>
-                            <div class="rounded-md border">
-                                <a href="./overview.php?id=<?php echo $row->id; ?>"><img src="./admin/<?php echo $row->image; ?>" alt="Laptop" class="aspect-[16/9] w-full object-cover rounded-md md:aspect-auto md:h-[200px] lg:h-[200px]" /></a>
+                            <div class="rounded-md shadow-xl">
+                                <a href="./overview.php?id=<?php echo $row->id; ?>"><img src="./admin/<?php echo $row->image; ?>" alt="Laptop" class="aspect-[16/9] w-full rounded-md object-cover md:aspect-auto md:h-[200px] lg:h-[200px]" /></a>
                                 <div class="p-4">
                                     <h1 class="inline-flex items-center text-lg font-semibold">
                                         <?php echo $row->name; ?>
@@ -235,24 +248,30 @@ error_reporting(0);
                                     </p>
 
                                     <div class="mt-5 flex items-center space-x-2">
-                                        <span class="block text-md font-semibold">Size : </span>
                                         <?php $weight = explode(",", $row->weight);
 
 
 
-                                        foreach ($weight as $w) : ?>
+                                        foreach ($weight as $w) :
 
 
-                                            <span class="block cursor-pointer rounded-md border border-gray-300 p-1 px-2 text-sm font-medium">
-                                                <?php echo $w; ?>
-                                            </span>
+                                            if ($w != "") :
+                                        ?>
 
-                                        <?php endforeach; ?>
+
+
+                                                <span class="block cursor-pointer rounded-md border border-gray-300 p-1 px-2 text-sm font-medium">
+                                                    <?php echo $w; ?>
+                                                </span>
+
+                                        <?php
+                                            endif;
+                                        endforeach; ?>
 
                                     </div>
                                     <div class="mt-5 flex items-center space-x-2">
-                                        <span class="block text-lg font-semibold">₹ <?php $price = explode(",", $row->prices);
-                                                                                    echo $price[0]; ?></span>
+                                        <span class="block text-xl font-semibold font-sans"><?php $price = explode(",", $row->prices);
+                                                                                            echo ($price[0] != "") ? "₹ " . $price[0] : "" ?></span>
                                         </span>
                                     </div>
                                     <a href="./overview.php?id=<?php echo $row->id; ?>">
@@ -287,13 +306,11 @@ error_reporting(0);
         <div class="grid grid-flow-row grid-cols-1">
 
             <div class="flex flex-col gap-4 rounded-lg overflow-hidden">
-                <video src="./assets/images/video.mp4" autoplay loop muted class=""></video>
+                <video src="./assets/images/hamper video.mp4" autoplay loop muted class=""></video>
             </div>
 
         </div>
     </div>
-
-
 
     <?php
     include './components/founder.html';
